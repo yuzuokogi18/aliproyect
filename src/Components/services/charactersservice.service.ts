@@ -21,7 +21,6 @@ export class CharactersService {
     );
   }
 
-  // Método para filtrar personajes por raza o afiliación
   getFilteredCharacters(page: number = 1, limit: number = 10, filters: any): Observable<{ items: ICharacter[], meta: any, links: any }> {
     let query = `?page=${page}&limit=${limit}`;
     for (let key in filters) {
@@ -37,4 +36,3 @@ export class CharactersService {
     );
   }
 }
-

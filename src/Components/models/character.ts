@@ -1,16 +1,24 @@
 export interface ICharacter {
     id: number;
     name: string;
-    image: string;
+    ki: string;
+    maxKi: string;
     race: string;
     gender: string;
-    ki: string;  // Renombrado de base_ki a ki
-    maxKi: string; 
-    affiliation: string;
     description: string;
-    transformations: ITransformation[];
-}
-
-export interface ITransformation {
-    name: string;
-}
+    image: string;
+    affiliation: string;
+    originPlanet?: {
+      name: string;
+      description: string;
+      image: string;
+      isDestroyed: boolean;
+    };
+    transformations?: {
+      name: string;
+      ki: string;
+      image: string;
+    }[];
+    showDescription?: boolean;
+  }
+  

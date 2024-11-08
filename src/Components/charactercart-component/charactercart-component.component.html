@@ -1,24 +1,33 @@
 <div class="characters-list">
     <div *ngFor="let character of characters" class="character-item">
       <h3>{{ character.name }}</h3>
-      
+  
       <img [src]="character.image" alt="{{ character.name }}" class="character-image">
-    
+  
       <p><strong>Raza:</strong> {{ character.race }}</p>
       <p><strong>Género:</strong> {{ character.gender }}</p>
       <p><strong>Ki base:</strong> {{ parseKi(character.ki) }}</p>
       <p><strong>Ki total:</strong> {{ parseKi(character.maxKi) }}</p>
       <p><strong>Afiliación:</strong> {{ character.affiliation }}</p>
-
-   
-      <div *ngIf="character.transformations && character.transformations.length > 0">
-        <h4>Transformaciones:</h4>
-        <ul>
-          <li *ngFor="let transformation of character.transformations">
-            {{ transformation.name }}
-          </li>
-        </ul>
-      </div>
-    </div>
+  
+      <button (click)="showDescription(character)">Ver Descripción</button>
+<div *ngIf="character.showDescription">
+  <h4>Descripción:</h4>
+  <p>{{ character.description }}</p>
+  <h4>Planeta de Origen:</h4>
+  <p><strong>{{ character.originPlanet?.name }}</strong></p>
+  <p>{{ character.originPlanet?.description }}</p>
+  <img [src]="character.originPlanet?.image" alt="{{ character.originPlanet?.name }}" class="planet-image">
+  
+  <div *ngIf="character.transformations && character.transformations.length > 0">
+    <h4>Transformaciones:</h4>
+    <ul>
+      <li *ngFor="let transformation of character.transformations">
+        <img [src]="transformation.image" alt="{{ transformation.name }}" class="transformation-image">
+        <p>{{ transformation.name }} - Ki: {{ parseKi(transformation.ki) }}</p>
+      </li>
+    </ul>
   </div>
+</div>
+
   

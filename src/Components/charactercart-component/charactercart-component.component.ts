@@ -3,7 +3,7 @@ import { ICharacter } from '../models/character';
 import { CharactersService } from '../services/charactersservice.service';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-
+import Swal from 'sweetalert2'; 
 @Component({
   selector: 'app-charactercart-component',
   standalone: true,
@@ -26,17 +26,31 @@ export class CharacterCartComponentComponent implements OnInit {
 
   loadCharacters(page: number = 1): void {
     this.charactersService.getCharacters(page, this.limit).subscribe((response) => {
-      console.log(response);  // Añade esto para ver la respuesta completa
-      this.characters = response.items;
+      console.log(response); 
+      this.characters = response.items.map(character => {
+        return { ...character, showDescription: false };
+      });
       this.meta = response.meta;
       this.links = response.links;
       this.currentPage = page;
     });
   }
+
+  showDescription(character: ICharacter): void {
   
+    character.showDescription = !character.showDescription;
+  
+    Swal.fire({
+      title: `Detalles de ${character.name}`,
+      text: 'Aquí tienes la información completa del personaje:',
+      html: `<pre style="text-align: left; white-space: pre-wrap;">${JSON.stringify(character, null, 2)}</pre>`, 
+      confirmButtonText: 'Cerrar'
+    });
+  }
+
   parseKi(ki: string): string {
     if (ki) {
-      return ki.replace(/\./g, ','); // Reemplaza los puntos con comas para un formato más adecuado
+      return ki.replace(/\./g, ',');
     }
     return 'No disponible';
   }
