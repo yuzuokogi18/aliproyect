@@ -1,0 +1,25 @@
+<div class="characters-list">
+    <div *ngFor="let character of characters" class="character-item">
+      <h3>{{ character.name }}</h3>
+      
+      <!-- Imagen del personaje -->
+      <img [src]="character.image" alt="{{ character.name }}" class="character-image">
+      
+      <!-- Información adicional -->
+      <p><strong>Raza:</strong> {{ character.race }}</p>
+      <p><strong>Género:</strong> {{ character.gender }}</p>
+      <p><strong>Ki base:</strong> {{ character.base_ki | number }}</p>
+      <p><strong>Ki total:</strong> {{ character.total_ki | number }}</p>
+
+      
+      <!-- Sección para transformaciones (si las tiene) -->
+      <div *ngIf="character.transformations && character.transformations.length > 0">
+        <h4>Transformaciones:</h4>
+        <ul>
+          <li *ngFor="let transformation of character.transformations">
+            {{ transformation.name }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
