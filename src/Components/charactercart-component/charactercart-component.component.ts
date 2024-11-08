@@ -26,10 +26,18 @@ export class CharacterCartComponentComponent implements OnInit {
 
   loadCharacters(page: number = 1): void {
     this.charactersService.getCharacters(page, this.limit).subscribe((response) => {
+      console.log(response);  // Añade esto para ver la respuesta completa
       this.characters = response.items;
       this.meta = response.meta;
       this.links = response.links;
       this.currentPage = page;
     });
+  }
+  
+  parseKi(ki: string): string {
+    if (ki) {
+      return ki.replace(/\./g, ','); // Reemplaza los puntos con comas para un formato más adecuado
+    }
+    return 'No disponible';
   }
 }

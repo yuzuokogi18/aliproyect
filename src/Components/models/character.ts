@@ -4,13 +4,13 @@ export interface ICharacter {
     image: string;
     race: string;
     gender: string;
-    base_ki: number;
-    total_ki: number;
+    ki: string;  // Renombrado de base_ki a ki
+    maxKi: string; 
+    affiliation: string;
     description: string;
     transformations: ITransformation[];
-  }
-  
-  export interface ITransformation {
+}
+
+export interface ITransformation {
     name: string;
-  }
-  
+}
