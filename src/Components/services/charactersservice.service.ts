@@ -12,6 +12,7 @@ export class CharactersService {
 
   constructor(private http: HttpClient) {}
 
+  // Primer método: obtiene una lista de personajes
   getCharacters(page: number = 1, limit: number = 10): Observable<{ items: ICharacter[], meta: any, links: any }> {
     const url = `${this.baseUrl}?page=${page}&limit=${limit}`;
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
@@ -21,17 +22,12 @@ export class CharactersService {
     );
   }
 
-  getFilteredCharacters(page: number = 1, limit: number = 10, filters: any): Observable<{ items: ICharacter[], meta: any, links: any }> {
-    let query = `?page=${page}&limit=${limit}`;
-    for (let key in filters) {
-      if (filters[key]) {
-        query += `&${key}=${filters[key]}`;
-      }
-    }
-    const url = `${this.baseUrl}${query}`;
+  // Segundo método: obtiene las transformaciones de un personaje específico
+  getCharacterDetails(id: number): Observable<ICharacter> {
+    const url = `${this.baseUrl}/${id}`;
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-    return this.http.get<{ items: ICharacter[], meta: any, links: any }>(url, { headers }).pipe(
+    return this.http.get<ICharacter>(url, { headers }).pipe(
       map(response => response)
     );
   }

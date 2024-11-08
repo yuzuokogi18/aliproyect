@@ -37,14 +37,18 @@ export class CharacterCartComponentComponent implements OnInit {
   }
 
   showDescription(character: ICharacter): void {
-  
-    character.showDescription = !character.showDescription;
-  
-    Swal.fire({
-      title: `Detalles de ${character.name}`,
-      text: 'Aquí tienes la información completa del personaje:',
-      html: `<pre style="text-align: left; white-space: pre-wrap;">${JSON.stringify(character, null, 2)}</pre>`, 
-      confirmButtonText: 'Cerrar'
+    
+    this.charactersService.getCharacterDetails(character.id).subscribe((detailedCharacter) => {
+      console.log('Character with transformations:', detailedCharacter);
+
+      Swal.fire({
+        title: `Detalles de ${detailedCharacter.name}`,
+        html: `
+          <h4>Descripción Completa</h4>
+          <pre style="white-space: pre-wrap; font-size: 12px;">${JSON.stringify(detailedCharacter, null, 2)}</pre>
+        `,
+        confirmButtonText: 'Cerrar'
+      });
     });
   }
 

@@ -12,22 +12,23 @@
   
       <button (click)="showDescription(character)">Ver Descripción</button>
 <div *ngIf="character.showDescription">
-  <h4>Descripción:</h4>
-  <p>{{ character.description }}</p>
-  <h4>Planeta de Origen:</h4>
-  <p><strong>{{ character.originPlanet?.name }}</strong></p>
-  <p>{{ character.originPlanet?.description }}</p>
-  <img [src]="character.originPlanet?.image" alt="{{ character.originPlanet?.name }}" class="planet-image">
-  
-  <div *ngIf="character.transformations && character.transformations.length > 0">
-    <h4>Transformaciones:</h4>
-    <ul>
-      <li *ngFor="let transformation of character.transformations">
-        <img [src]="transformation.image" alt="{{ transformation.name }}" class="transformation-image">
-        <p>{{ transformation.name }} - Ki: {{ parseKi(transformation.ki) }}</p>
-      </li>
-    </ul>
-  </div>
+    <div *ngIf="character.originPlanet">
+        <h4>Planeta de Origen:</h4>
+        <p><strong>{{ character.originPlanet?.name }}</strong></p>
+        <p>{{ character.originPlanet?.description }}</p>
+        <img [src]="character.originPlanet?.image" alt="{{ character.originPlanet?.name }}" class="planet-image">
+      </div>
+      
+      <div *ngIf="character.transformations && character.transformations.length > 0">
+        <h4>Transformaciones:</h4>
+        <ul>
+          <li *ngFor="let transformation of character.transformations">
+            <img [src]="transformation.image" alt="{{ transformation.name }}" class="transformation-image">
+            <p>{{ transformation.name }} - Ki: {{ parseKi(transformation.ki) }}</p>
+          </li>
+        </ul>
+      </div>
+      
 </div>
 
   
